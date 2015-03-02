@@ -16,9 +16,12 @@ class MqttForwardBenchmarkTest extends Assert {
     void shouldPerformSmokeTest() {
     }
 
-    @Bean(initMethod = 'start', destroyMethod = 'close')
+    // Test beans
+
+    @Bean(initMethod = 'start', destroyMethod = 'stop')
     BrokerService brokerService() {
         def broker = new BrokerService()
+        broker.setPersistent(false)
         broker.addConnector('mqtt+nio://localhost:1883')
         broker
     }

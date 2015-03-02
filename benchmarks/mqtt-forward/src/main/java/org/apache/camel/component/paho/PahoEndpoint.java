@@ -11,11 +11,13 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class PahoEndpoint extends DefaultEndpoint {
 
-    String broker = "tcp://iot.eclipse.org:1883";
     String clientId = "JavaSample";
+
     MemoryPersistence persistence = new MemoryPersistence();
 
     // Configuration members
+
+    private String brokerUrl = "tcp://localhost:1883";
 
     private String topic;
 
@@ -35,7 +37,7 @@ public class PahoEndpoint extends DefaultEndpoint {
     @Override
     protected void doStart() throws Exception {
         super.doStart();
-        client = new MqttClient(broker, clientId, persistence);
+        client = new MqttClient(getBrokerUrl(), clientId, persistence);
         MqttConnectOptions connOpts = new MqttConnectOptions();
         connOpts.setCleanSession(true);
         client.connect();
@@ -68,6 +70,14 @@ public class PahoEndpoint extends DefaultEndpoint {
     }
 
     // Configuration getters & setters
+
+    public String getBrokerUrl() {
+        return brokerUrl;
+    }
+
+    public void setBrokerUrl(String brokerUrl) {
+        this.brokerUrl = brokerUrl;
+    }
 
     public String getTopic() {
         return topic;
