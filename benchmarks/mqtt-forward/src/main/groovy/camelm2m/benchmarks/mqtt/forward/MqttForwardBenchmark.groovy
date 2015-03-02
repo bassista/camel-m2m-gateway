@@ -9,10 +9,11 @@ import static java.util.UUID.randomUUID
 class MqttForwardBenchmark extends FatJarRouter {
 
     @Override
-    public void configure() throws Exception {
-        from("timer:foo").
-                setBody().expression { randomUUID().toString() }.
-                to("paho:topic");
+    void configure() {
+        from('timer:foo').
+                setBody().expression { randomUUID().toString() }.to('seda:queue')
+
+        from('seda:queue').to("paho:topic")
     }
 
 }
