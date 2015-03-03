@@ -45,7 +45,9 @@ public class PahoEndpoint extends DefaultEndpoint {
 
     @Override
     protected void doStop() throws Exception {
-        getClient().disconnect();
+        if (getClient().isConnected()) {
+            getClient().disconnect();
+        }
         super.doStop();
     }
 
@@ -56,7 +58,7 @@ public class PahoEndpoint extends DefaultEndpoint {
 
     @Override
     public Consumer createConsumer(Processor processor) throws Exception {
-        return null;
+        return new PahoConsumer(this, processor);
     }
 
     @Override
