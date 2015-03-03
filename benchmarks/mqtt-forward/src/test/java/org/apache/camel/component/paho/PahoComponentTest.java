@@ -19,6 +19,11 @@ public class PahoComponentTest extends CamelTestSupport {
     int mqttPort = findAvailableTcpPort();
 
     @Override
+    protected boolean useJmx() {
+        return false;
+    }
+
+    @Override
     public void doPreSetup() throws Exception {
         super.doPreSetup();
         broker = new BrokerService();

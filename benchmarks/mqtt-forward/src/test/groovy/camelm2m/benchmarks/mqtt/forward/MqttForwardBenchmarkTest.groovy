@@ -43,6 +43,7 @@ class MqttForwardBenchmarkTestConfiguration {
     @Bean(initMethod = 'start', destroyMethod = 'stop')
     BrokerService brokerService() {
         def broker = new BrokerService()
+        broker.setBrokerName(getClass().getSimpleName())
         broker.setPersistent(false)
         broker.addConnector('mqtt://localhost:1883')
         broker
