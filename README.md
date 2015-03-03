@@ -1,7 +1,9 @@
 # Camel M2M gateway
 
 This project summarizes the R&D activities around adopting the Apache Camel as the *Internet Of Things* M2M
-gateway.
+gateway. By the *gateway* we understand a field device with the moderate processing power (such as
+[Raspberry Pi](http://www.raspberrypi.org) or [BeagleBone Black](http://beagleboard.org/BLACK)) responsible for the
+routing of the messages between the IoT edge devices (sensors, drones, cars, etc) and the data center.
 
 ## Who's behind the project
 
