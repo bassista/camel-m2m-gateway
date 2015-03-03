@@ -15,7 +15,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>1.2.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
@@ -38,7 +37,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>1.2.2.RELEASE</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -63,7 +61,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>1.2.2.RELEASE</version>
+                <version>${spring.boot.version}</version>
                 <configuration>
                     <mainClass>camelm2m.benchmarks.mqtt.forward.MqttForwardBenchmark</mainClass>
                 </configuration>
