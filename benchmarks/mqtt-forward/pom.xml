@@ -63,7 +63,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
                 <configuration>
-                    <mainClass>camelm2m.benchmarks.mqtt.forward.MqttForwardBenchmark</mainClass>
+                    <mainClass>org.apache.camel.spring.boot.FatJarRouter</mainClass>
                 </configuration>
                 <executions>
                     <execution>
