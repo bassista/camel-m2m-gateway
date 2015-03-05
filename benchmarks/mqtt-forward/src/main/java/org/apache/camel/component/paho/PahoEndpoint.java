@@ -11,14 +11,14 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.eclipse.paho.client.mqttv3.persist.MqttDefaultFilePersistence;
 
-import static java.util.UUID.randomUUID;
+import static java.lang.System.nanoTime;
 import static org.apache.camel.component.paho.PahoPersistence.MEMORY;
 
 public class PahoEndpoint extends DefaultEndpoint {
 
-    String clientId = randomUUID().toString().substring(0, 22);
-
     // Configuration members
+
+    private String clientId = "camel-" + nanoTime();
 
     private String brokerUrl = "tcp://localhost:1883";
 
@@ -42,7 +42,7 @@ public class PahoEndpoint extends DefaultEndpoint {
     @Override
     protected void doStart() throws Exception {
         super.doStart();
-        client = new MqttClient(getBrokerUrl(), clientId, resolvePersistence());
+        client = new MqttClient(getBrokerUrl(), getClientId(), resolvePersistence());
         MqttConnectOptions connOpts = new MqttConnectOptions();
         connOpts.setCleanSession(true);
         client.connect();
@@ -83,6 +83,14 @@ public class PahoEndpoint extends DefaultEndpoint {
     }
 
     // Configuration getters & setters
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
 
     public String getBrokerUrl() {
         return brokerUrl;
