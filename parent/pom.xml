@@ -21,6 +21,8 @@
         <activemq.version>5.11.1</activemq.version>
         <camel.version>2.15-SNAPSHOT</camel.version>
         <spring.boot.version>1.2.2.RELEASE</spring.boot.version>
+
+        <commons.lang.version>3.3.2</commons.lang.version>
     </properties>
 
     <dependencyManagement>
