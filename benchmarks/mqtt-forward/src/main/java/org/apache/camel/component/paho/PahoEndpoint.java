@@ -28,6 +28,10 @@ public class PahoEndpoint extends DefaultEndpoint {
 
     private PahoPersistence persistence = MEMORY;
 
+    // Collaboration members
+
+    private MqttConnectOptions connectOptions;
+
     // Auto-configuration members
 
     private MqttClient client;
@@ -43,9 +47,7 @@ public class PahoEndpoint extends DefaultEndpoint {
     protected void doStart() throws Exception {
         super.doStart();
         client = new MqttClient(getBrokerUrl(), getClientId(), resolvePersistence());
-        MqttConnectOptions connOpts = new MqttConnectOptions();
-        connOpts.setCleanSession(true);
-        client.connect();
+        client.connect(resolveMqttConnectOptions());
     }
 
     @Override
@@ -80,6 +82,13 @@ public class PahoEndpoint extends DefaultEndpoint {
 
     protected MqttClientPersistence resolvePersistence() {
         return persistence == MEMORY ? new MemoryPersistence() : new MqttDefaultFilePersistence();
+    }
+
+    protected MqttConnectOptions resolveMqttConnectOptions() {
+        if (connectOptions != null) {
+            return connectOptions;
+        }
+        return new MqttConnectOptions();
     }
 
     // Configuration getters & setters
@@ -134,4 +143,11 @@ public class PahoEndpoint extends DefaultEndpoint {
         this.client = client;
     }
 
+    public MqttConnectOptions getConnectOptions() {
+        return connectOptions;
+    }
+
+    public void setConnectOptions(MqttConnectOptions connOpts) {
+        this.connectOptions = connOpts;
+    }
 }

@@ -4,12 +4,18 @@ import org.apache.activemq.broker.BrokerService;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
+import org.apache.camel.impl.JndiRegistry;
 import org.apache.camel.test.junit4.CamelTestSupport;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.junit.Test;
+import org.mockito.Mockito;
 
+import static org.mockito.Mockito.verify;
 import static org.springframework.util.SocketUtils.findAvailableTcpPort;
 
 public class PahoComponentTest extends CamelTestSupport {
+
+    MqttConnectOptions connectOptions = Mockito.mock(MqttConnectOptions.class);
 
     @EndpointInject(uri = "mock:test")
     MockEndpoint mock;
@@ -63,6 +69,11 @@ public class PahoComponentTest extends CamelTestSupport {
         mock.assertIsSatisfied();
     }
 
+    @Test
+    public void shouldUseConnectionOptionsFromRegistry() {
+        verify(connectOptions).getServerURIs();
+    }
+
     @Override
     protected RouteBuilder createRouteBuilder() throws Exception {
         return new RouteBuilder() {
@@ -73,8 +84,17 @@ public class PahoComponentTest extends CamelTestSupport {
                 from("paho:queue?brokerUrl=tcp://localhost:" + mqttPort).to("mock:test");
 
                 from("paho:persistenceTest?persistence=file&brokerUrl=tcp://localhost:" + mqttPort).to("mock:persistenceTest");
+
+                from("direct:connectOptions").to("paho:queue?connectOptions=#connectOptions&brokerUrl=tcp://localhost:" + mqttPort);
             }
         };
+    }
+
+    @Override
+    protected JndiRegistry createRegistry() throws Exception {
+        JndiRegistry registry = super.createRegistry();
+        registry.bind("connectOptions", connectOptions);
+        return registry;
     }
 
 }
