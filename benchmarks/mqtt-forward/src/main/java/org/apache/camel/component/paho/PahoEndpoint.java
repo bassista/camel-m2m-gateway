@@ -6,14 +6,17 @@ import org.apache.camel.Processor;
 import org.apache.camel.Producer;
 import org.apache.camel.impl.DefaultEndpoint;
 import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttClientPersistence;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.eclipse.paho.client.mqttv3.persist.MqttDefaultFilePersistence;
+
+import static java.util.UUID.randomUUID;
+import static org.apache.camel.component.paho.PahoPersistence.MEMORY;
 
 public class PahoEndpoint extends DefaultEndpoint {
 
-    String clientId = "JavaSample";
-
-    MemoryPersistence persistence = new MemoryPersistence();
+    String clientId = randomUUID().toString().substring(0, 22);
 
     // Configuration members
 
@@ -22,6 +25,8 @@ public class PahoEndpoint extends DefaultEndpoint {
     private String topic;
 
     private int qos = 2;
+
+    private PahoPersistence persistence = MEMORY;
 
     // Auto-configuration members
 
@@ -37,7 +42,7 @@ public class PahoEndpoint extends DefaultEndpoint {
     @Override
     protected void doStart() throws Exception {
         super.doStart();
-        client = new MqttClient(getBrokerUrl(), clientId, persistence);
+        client = new MqttClient(getBrokerUrl(), clientId, resolvePersistence());
         MqttConnectOptions connOpts = new MqttConnectOptions();
         connOpts.setCleanSession(true);
         client.connect();
@@ -71,6 +76,12 @@ public class PahoEndpoint extends DefaultEndpoint {
         return (PahoComponent) super.getComponent();
     }
 
+    // Resolvers
+
+    protected MqttClientPersistence resolvePersistence() {
+        return persistence == MEMORY ? new MemoryPersistence() : new MqttDefaultFilePersistence();
+    }
+
     // Configuration getters & setters
 
     public String getBrokerUrl() {
@@ -98,6 +109,14 @@ public class PahoEndpoint extends DefaultEndpoint {
     }
 
     // Auto-configuration getters & setters
+
+    public PahoPersistence getPersistence() {
+        return persistence;
+    }
+
+    public void setPersistence(PahoPersistence persistence) {
+        this.persistence = persistence;
+    }
 
     public MqttClient getClient() {
         return client;
