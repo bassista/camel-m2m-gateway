@@ -78,6 +78,12 @@
                     <compilerId>groovy-eclipse-compiler</compilerId>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-eclipse-compiler</artifactId>
+                <version>2.9.1-01</version>
+                <extensions>true</extensions>
+            </plugin>
         </plugins>
     </build>
 
