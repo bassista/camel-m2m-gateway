@@ -20,6 +20,7 @@
 
         <activemq.version>5.11.1</activemq.version>
         <camel.version>2.15-SNAPSHOT</camel.version>
+        <paho.version>0.4.0</paho.version>
         <spring.boot.version>1.2.2.RELEASE</spring.boot.version>
 
         <commons.lang.version>3.3.2</commons.lang.version>
@@ -81,13 +82,14 @@
             <plugin>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-eclipse-compiler</artifactId>
-                <version>2.9.1-01</version>
+                <version>${groovy-eclipse-compiler.version}</version>
                 <extensions>true</extensions>
             </plugin>
         </plugins>
     </build>
 
     <repositories>
+        <!-- Required to get Camel 2.15 . -->
         <repository>
             <id>apache.snapshots</id>
             <name>Apache Development Snapshot Repository</name>
@@ -99,9 +101,16 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+
         <repository>
             <id>Eclipse Paho Repo</id>
             <url>https://repo.eclipse.org/content/repositories/paho-releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
 
