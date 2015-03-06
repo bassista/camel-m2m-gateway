@@ -43,13 +43,11 @@ class StatisticImpl extends TimerTask implements Statistic {
         Long consumedCount = counterConsumed.get()
         Long creationPerformance = createdCount / sec
         Long consumptionPerformance = consumedCount / sec
-        new Details(
-                createdCount,
-                consumedCount,
-                sec,
-                creationPerformance,
-                consumptionPerformance
-        );
+        new Details(created: createdCount,
+                    consumed: consumedCount,
+                    duration: sec,
+                    creationPerformance: creationPerformance,
+                    consumptionPerformance: consumptionPerformance)
     }
 
     @Override
