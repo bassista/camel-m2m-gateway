@@ -21,7 +21,6 @@ public class PahoProducer extends DefaultProducer {
         MqttMessage message = new MqttMessage(payload);
         message.setQos(qos);
         client.publish(topic, message);
-        System.out.println("Message published");
     }
 
     @Override
