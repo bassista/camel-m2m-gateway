@@ -55,18 +55,6 @@
                 <artifactId>camel-m2m-gateway-benchmarks-statistic</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>com.github.zed-platform</groupId>
-                <artifactId>zed-shell</artifactId>
-                <classifier>classes</classifier>
-                <version>${zed.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.zed-platform</groupId>
-                <artifactId>zed-ssh-client</artifactId>
-                <version>${zed.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

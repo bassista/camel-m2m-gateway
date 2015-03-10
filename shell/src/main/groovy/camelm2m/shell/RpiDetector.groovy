@@ -28,7 +28,7 @@ class RpiDetector {
     List<Inet4Address> detectRpiAddresses() {
         detectReachableAddresses().findAll {
             try {
-                new SshClient(it.hostAddress, 22).command('echo ping')
+                new SshClient(it.hostAddress, 22, 'pi', 'raspberry').command('echo ping')
                 return true
             } catch (Exception ex) {
                 LOG.debug("Can't connect to the Raspberry Pi device ${it.hostAddress}.", ex)
