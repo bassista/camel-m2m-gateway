@@ -83,7 +83,7 @@ public class PahoComponentTest extends CamelTestSupport {
 
                 from("paho:queue?brokerUrl=tcp://localhost:" + mqttPort).to("mock:test");
 
-                from("paho:persistenceTest?persistence=file&brokerUrl=tcp://localhost:" + mqttPort).to("mock:persistenceTest");
+                from("paho:persistenceTest?persistence=FILE&brokerUrl=tcp://localhost:" + mqttPort).to("mock:persistenceTest");
 
                 from("direct:connectOptions").to("paho:queue?connectOptions=#connectOptions&brokerUrl=tcp://localhost:" + mqttPort);
             }
