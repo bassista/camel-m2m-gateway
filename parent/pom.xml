@@ -20,10 +20,10 @@
 
         <activemq.version>5.11.1</activemq.version>
         <camel.version>2.15-SNAPSHOT</camel.version>
+        <commons.lang.version>3.3.2</commons.lang.version>
         <paho.version>0.4.0</paho.version>
         <spring.boot.version>1.2.2.RELEASE</spring.boot.version>
-
-        <commons.lang.version>3.3.2</commons.lang.version>
+        <zed.version>0.0.18</zed.version>
     </properties>
 
     <dependencyManagement>
@@ -54,6 +54,18 @@
                 <groupId>com.github.camel-m2m-gateway</groupId>
                 <artifactId>camel-m2m-gateway-benchmarks-statistic</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.zed-platform</groupId>
+                <artifactId>zed-shell</artifactId>
+                <classifier>classes</classifier>
+                <version>${zed.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.zed-platform</groupId>
+                <artifactId>zed-ssh-client</artifactId>
+                <version>${zed.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
