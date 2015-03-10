@@ -23,7 +23,7 @@
         <commons.lang.version>3.3.2</commons.lang.version>
         <paho.version>0.4.0</paho.version>
         <spring.boot.version>1.2.2.RELEASE</spring.boot.version>
-        <zed.version>0.0.18</zed.version>
+        <zed.version>0.0.19-SNAPSHOT</zed.version>
     </properties>
 
     <dependencyManagement>
