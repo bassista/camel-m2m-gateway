@@ -9,13 +9,10 @@ import org.apache.camel.test.AvailablePortFinder;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.junit.Test;
-import org.mockito.Mockito;
-
-import static org.mockito.Mockito.verify;
 
 public class PahoComponentTest extends CamelTestSupport {
 
-    MqttConnectOptions connectOptions = Mockito.mock(MqttConnectOptions.class);
+    MqttConnectOptions connectOptions = new MqttConnectOptions();
 
     @EndpointInject(uri = "mock:test")
     MockEndpoint mock;
@@ -44,6 +41,31 @@ public class PahoComponentTest extends CamelTestSupport {
         broker.stop();
     }
 
+    @Override
+    protected RouteBuilder createRouteBuilder() throws Exception {
+        return new RouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                from("direct:test").to("paho:queue?brokerUrl=tcp://localhost:" + mqttPort);
+
+                from("paho:queue?brokerUrl=tcp://localhost:" + mqttPort).to("mock:test");
+
+                from("paho:persistenceTest?persistence=FILE&brokerUrl=tcp://localhost:" + mqttPort).to("mock:persistenceTest");
+
+                from("direct:connectOptions").to("paho:registryConnectOptions?connectOptions=#connectOptions&brokerUrl=tcp://localhost:" + mqttPort);
+            }
+        };
+    }
+
+    @Override
+    protected JndiRegistry createRegistry() throws Exception {
+        JndiRegistry registry = super.createRegistry();
+        registry.bind("connectOptions", connectOptions);
+        return registry;
+    }
+
+    // Tests
+
     @Test
     public void shouldReadMessageFromMqtt() throws InterruptedException {
         // Given
@@ -71,30 +93,13 @@ public class PahoComponentTest extends CamelTestSupport {
 
     @Test
     public void shouldUseConnectionOptionsFromRegistry() {
-        verify(connectOptions).getServerURIs();
-    }
+        // Given
+        PahoEndpoint pahoWithConnectOptionsFromRegistry = getMandatoryEndpoint(
+                "paho:registryConnectOptions?connectOptions=#connectOptions&brokerUrl=tcp://localhost:" + mqttPort,
+                PahoEndpoint.class);
 
-    @Override
-    protected RouteBuilder createRouteBuilder() throws Exception {
-        return new RouteBuilder() {
-            @Override
-            public void configure() throws Exception {
-                from("direct:test").to("paho:queue?brokerUrl=tcp://localhost:" + mqttPort);
-
-                from("paho:queue?brokerUrl=tcp://localhost:" + mqttPort).to("mock:test");
-
-                from("paho:persistenceTest?persistence=FILE&brokerUrl=tcp://localhost:" + mqttPort).to("mock:persistenceTest");
-
-                from("direct:connectOptions").to("paho:queue?connectOptions=#connectOptions&brokerUrl=tcp://localhost:" + mqttPort);
-            }
-        };
-    }
-
-    @Override
-    protected JndiRegistry createRegistry() throws Exception {
-        JndiRegistry registry = super.createRegistry();
-        registry.bind("connectOptions", connectOptions);
-        return registry;
+        // Then
+        assertSame(connectOptions, pahoWithConnectOptionsFromRegistry.resolveMqttConnectOptions());
     }
 
 }
