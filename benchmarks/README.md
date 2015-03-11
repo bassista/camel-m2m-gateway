@@ -25,7 +25,7 @@ operations become a bottleneck otherwise)
  significantly. Consider using [Camel throttler](http://camel.apache.org/throttler.html) to limit the number of the
  messages sent to the queue.
 
-#### 15 consumers sending messages to the MQTT broker
+#### Benchmark 1: 15 consumers sending messages to the MQTT broker
 
 In this particular benchmarks we used 15 concurrent consumers, reading messages from the in-memory
 [SEDA](http://camel.apache.org/seda.html) queue. Route performs really well (up to ~580 messages per second) until
