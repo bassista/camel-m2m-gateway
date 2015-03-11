@@ -28,17 +28,18 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>com.github.zed-platform</groupId>
-                <artifactId>zed-bom</artifactId>
-                <version>${zed.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+            <!-- TODO: Remove Camel BOM as soon as Camel 2.15.0 is out. Rely on zed BOM instead. -->
             <dependency>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-parent</artifactId>
                 <version>${camel.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.github.zed-platform</groupId>
+                <artifactId>zed-bom</artifactId>
+                <version>${zed.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

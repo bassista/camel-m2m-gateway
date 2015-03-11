@@ -5,13 +5,13 @@ import org.apache.camel.EndpointInject;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.JndiRegistry;
+import org.apache.camel.test.AvailablePortFinder;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.mockito.Mockito.verify;
-import static org.springframework.util.SocketUtils.findAvailableTcpPort;
 
 public class PahoComponentTest extends CamelTestSupport {
 
@@ -22,7 +22,7 @@ public class PahoComponentTest extends CamelTestSupport {
 
     BrokerService broker;
 
-    int mqttPort = findAvailableTcpPort();
+    int mqttPort = AvailablePortFinder.getNextAvailable();
 
     @Override
     protected boolean useJmx() {

@@ -10,7 +10,19 @@ import static org.slf4j.LoggerFactory.getLogger
 
 class RpiDetector {
 
+    private static final int DEFAULT_PING_TIMEOUT = 500
+
     private final static Logger LOG = getLogger(RpiDetector.class)
+
+    private final int timeout
+
+    RpiDetector(int timeout) {
+        this.timeout = timeout
+    }
+
+    RpiDetector() {
+        this(DEFAULT_PING_TIMEOUT)
+    }
 
     List<Inet4Address> detectReachableAddresses() {
         def networkInterface = networkInterfaces.toList().find { it.displayName.startsWith('wlan') }
@@ -21,7 +33,7 @@ class RpiDetector {
         def addressBase = address.substring(0, lastDot)
         def addressesNumber = address.substring(lastDot).toInteger()
         (1..addressesNumber).collect { Inet4Address.getByName(addressBase + it) }.parallelStream().filter() {
-            it.isReachable(1000)
+            it.isReachable(timeout)
         }.collect(Collectors.toList())
     }
 

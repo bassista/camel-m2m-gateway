@@ -12,7 +12,7 @@ import static java.util.UUID.randomUUID
 @SpringBootApplication
 class MqttForwardBenchmark extends FatJarRouter {
 
-    @Value('${statistics.save.period:30}')
+    @Value('${statistics.save.period:1000}')
     private int savePeriod;
 
     @Value('${sensors.number:3}')
