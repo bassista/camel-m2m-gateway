@@ -9,26 +9,42 @@ test events using internal Camel timer and for each event we send a message to t
 use in-memory [SEDA](http://camel.apache.org/seda.html) queue to decouple events collection from the MQTT sending
 process.
 
-TL;DR;
-
 ### Raspberry Pi 2 results
 
-"Seda + MQTT
- java -Dsensors.number=1 -Dbroker.consumers=15 -jar camel-m2m-gateway-benchmarks-mqtt-forward-0.1-SNAPSHOT.jar"
+TL;DR; You can send almost 600 small messages per second from Raspbberry Pi 2 gateway to the MQTT server.
 
-| Test duration in seconds | Messages created (total)    | Messages consumed (total)    | Messages created per second | Messages consumed per second | Current queue size | Thread count |
-|:------------------------:|:---------------------------:|:----------------------------:|:---------------------------:|:----------------------------:|:------------------:|:------------:|
-| 30                       | 7652                        |	7637	                    | 255	                      | 254	                         | 15	              | 49           |
-| 60	                   | 27924|	27917| 	465| 	465| 	7| 	49|
-| 90	| 48284	| 48273	| 536	| 536	| 11	| 49|
-| 120	| 69787	| 69775	| 581	| 581	| 12	| 49|
-| 151	| 87684	| 87666	| 580	| 580	| 18	| 49|
-| 181	| 90386	| 89846	| 499	| 496	| 540	| 49|
-| 212	| 92077	| 91655	| 434	| 432	| 422	| 49|
-| 244	| 94055	| 93167	| 385	| 381	| 888	| 49|
-| 274	| 95943	| 94579	| 350	| 345	| 1364	| 49|
-| 306	| 97472	| 96117	| 318	| 314	| 1355	| 49|
-| 337	| 99419	| 97652	| 295	| 289	| 1767	| 49|
+The following benchmarks were executed on the [Raspberry Pi 2](http://www.raspberrypi.org/products/raspberry-pi-2-model-b).
+Raspberry Pi 2 is really fast! As for such small and cheap device, the performance of the unit is really
+impressive.
+
+If you plan to run the [Paho](https://eclipse.org/paho) MQTT client on the RPi 2 remember to:
+
+- enqueue messages in the internal in-memory queue and use at least 15 concurrent threads to process these messages (as Paho IO
+operations become a bottleneck otherwise)
+- do not let sensors to put too many messages into the queue, otherwise the overall performance of the gateway is decreased
+ significantly. Consider using [Camel throttler](http://camel.apache.org/throttler.html) to limit the number of the
+ messages sent to the queue.
+
+#### 15 consumers sending messages to the MQTT broker
+
+In this particular benchmarks we used 15 concurrent consumers, reading messages from the in-memory
+[SEDA](http://camel.apache.org/seda.html) queue. Route performs really well (up to ~580 messages per second) until
+[Paho](https://eclipse.org/paho/) client got overwhelmed with the messages produced by the timer. When the number of
+the messages to be processed reach ~500, the performance of the gateway started to decrease.
+
+| Test duration in seconds | Messages created (total)    | Messages consumed (total)    | Messages created per second | Messages consumed per second | Current queue size | JVM threads count |
+|:------------------------:|:---------------------------:|:----------------------------:|:---------------------------:|:----------------------------:|:------------------:|:-----------------:|
+| 30    | 7652      | 7637      | 255	                      | 254	                         | 15	              | 49           |
+| 60    | 27924     | 27917     | 465| 	465| 	7| 	49|
+| 90	| 48284	    | 48273	    | 536	| 536	| 11	| 49|
+| 120	| 69787	    | 69775	    | 581	| 581	| 12	| 49|
+| 151	| 87684	    | 87666	    | 580	| 580	| 18	| 49|
+| 181	| 90386	    | 89846	    | 499	| 496	| 540	| 49|
+| 212	| 92077	    | 91655	    | 434	| 432	| 422	| 49|
+| 244	| 94055	    | 93167	    | 385	| 381	| 888	| 49|
+| 274	| 95943	    | 94579	    | 350	| 345	| 1364	| 49|
+| 306	| 97472	    | 96117	    | 318	| 314	| 1355	| 49|
+| 337	| 99419	    | 97652	    | 295	| 289	| 1767	| 49|
 | 368	| 101495	| 99150     | 275	| 269	| 2345	| 49|
 | 398	| 103118	| 100512	| 259	| 252	| 2606	| 49|
 | 431	| 104925	| 101080	| 243	| 234	| 3845	| 49|
@@ -38,7 +54,3 @@ TL;DR;
 | 557	| 117316	| 101137	| 210	| 181	| 16179	| 49|
 | 590	| 119842	| 101154	| 203	| 171	| 18688	| 49|
 | 621	| 121021	| 101157	| 194	| 162	| 19864	| 49|
-
-### Raspberry Pi B+ results
-
-TODO
