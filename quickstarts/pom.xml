@@ -4,17 +4,17 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.camel-m2m-gateway</groupId>
-    <version>0.1-SNAPSHOT</version>
-    <artifactId>camel-m2m-gateway</artifactId>
+    <parent>
+        <groupId>com.github.camel-m2m-gateway</groupId>
+        <artifactId>camel-m2m-gateway-parent</artifactId>
+        <version>0.1-SNAPSHOT</version>
+        <relativePath>../parent</relativePath>
+    </parent>
+    <artifactId>camelm2m-quickstarts</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>parent</module>
-        <module>camel-paho</module>
-        <module>benchmarks</module>
-        <module>shell</module>
-        <module>quickstarts</module>
+        <module>mqtt-producer-gateway</module>
     </modules>
 
 </project>
