@@ -21,7 +21,7 @@
         <activemq.version>5.11.1</activemq.version>
         <camel.version>2.15-SNAPSHOT</camel.version>
         <commons.lang.version>3.3.2</commons.lang.version>
-        <paho.version>0.4.0</paho.version>
+        <paho.version>1.0.2</paho.version>
         <spring.boot.version>1.2.2.RELEASE</spring.boot.version>
         <zed.version>0.0.19-SNAPSHOT</zed.version>
     </properties>
