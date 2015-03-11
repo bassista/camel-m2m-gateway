@@ -8,9 +8,9 @@ import java.util.Map;
 public class PahoComponent extends DefaultComponent {
 
     @Override
-    protected Endpoint createEndpoint(String uri, String s1, Map<String, Object> map) throws Exception {
+    protected Endpoint createEndpoint(String uri, String s1, Map<String, Object> options) throws Exception {
         PahoEndpoint pahoEndpoint = new PahoEndpoint(uri, this);
-        setProperties(pahoEndpoint, map);
+        setProperties(pahoEndpoint, options);
         return pahoEndpoint;
     }
 
