@@ -1,6 +1,6 @@
 package commands
 
-import camelm2m.shell.RpiDetector
+import camelm2m.shell.utils.RpiDetector
 import org.crsh.cli.Command
 import org.crsh.command.InvocationContext
 

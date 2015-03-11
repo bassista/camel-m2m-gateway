@@ -1,4 +1,4 @@
-package camelm2m.shell
+package camelm2m.shell.utils
 
 import org.slf4j.Logger
 import zed.ssh.client.SshClient
@@ -10,11 +10,19 @@ import static org.slf4j.LoggerFactory.getLogger
 
 class RpiDetector {
 
+    // Constants
+
     private static final int DEFAULT_PING_TIMEOUT = 500
+
+    // Logger
 
     private final static Logger LOG = getLogger(RpiDetector.class)
 
+    // Configuration members
+
     private final int timeout
+
+    // Constructors
 
     RpiDetector(int timeout) {
         this.timeout = timeout
@@ -24,8 +32,12 @@ class RpiDetector {
         this(DEFAULT_PING_TIMEOUT)
     }
 
+    // Operations
+
     List<Inet4Address> detectReachableAddresses() {
-        def networkInterface = networkInterfaces.toList().find { it.displayName.startsWith('wlan') }
+        def networkInterface = networkInterfaces.toList().find {
+            it.displayName.startsWith('wlan') || it.displayName.startsWith('eth')
+        }
         def networkAddress = networkInterface.interfaceAddresses.find { it.address.getHostAddress().length() < 15 }
         def broadcast = networkAddress.broadcast
         def address = broadcast.hostAddress
