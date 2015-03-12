@@ -33,6 +33,9 @@ class MqttForwardBenchmark extends FatJarRouter {
     @Value('${brokerUrl:tcp://localhost:1883}')
     private String brokerUrl;
 
+    @Value('${paho.enabled:true}')
+    private boolean pahoEnabled;
+
     @Override
     void configure() {
         errorHandler(deadLetterChannel("seda:DLQ"))
@@ -46,8 +49,12 @@ class MqttForwardBenchmark extends FatJarRouter {
                     .to("bean:statistic?method=updateCreated", "${queueType}://queue:RPi")
         }
 
-        from("${queueType}://queue:RPi?concurrentConsumers=${consumers}")
-                .multicast().to("paho:topic?brokerUrl=${brokerUrl}", "bean:statistic?method=updateConsumed")
+        def from = from("${queueType}://queue:RPi?concurrentConsumers=${consumers}")
+        if (pahoEnabled) {
+            from.multicast().to("paho:topic?brokerUrl=${brokerUrl}", "bean:statistic?method=updateConsumed")
+        } else {
+            from.to("bean:statistic?method=updateConsumed")
+        }
     }
 
     @Bean
