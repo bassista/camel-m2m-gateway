@@ -9,6 +9,8 @@ test events using internal Camel timer and for each event we send a message to t
 use in-memory [SEDA](http://camel.apache.org/seda.html) queue to decouple events collection from the MQTT sending
 process. We also use [Camel Paho component](http://camel.apache.org/paho) as the MQTT broker.
 
+The broker itself doesn't perform any action against the messages it receives. There is no subscriber to the MQTT topic. We use dockerized ActiveMQ 5.11.
+
 ### Raspberry Pi 2 results
 
 TL;DR; You can send almost 600 small messages per second from Raspbberry Pi 2 gateway to the MQTT server.
