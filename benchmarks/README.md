@@ -7,7 +7,7 @@ This page summarizes some benchmarks of the Camel executed on the small computin
 In [this](https://github.com/hekonsek/camel-m2m-gateway/tree/master/benchmarks/mqtt-forward) benchmark we generate
 test events using internal Camel timer and for each event we send a message to the external ActiveMQ MQTT broker. We
 use in-memory [SEDA](http://camel.apache.org/seda.html) queue to decouple events collection from the MQTT sending
-process.
+process. We also use [Camel Paho component](http://camel.apache.org/paho) as the MQTT broker.
 
 ### Raspberry Pi 2 results
 
