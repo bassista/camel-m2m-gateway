@@ -1,5 +1,4 @@
-# Camelm2m
-## Apache Camel-based M2M gateway
+# Camelm2m - the Apache Camel-based M2M gateway
 
 This project summarizes the R&D activities around the process of adopting the Apache Camel as the *Internet Of Things* M2M
 gateway. By the *gateway* we understand a field device with the moderate processing power (such as
