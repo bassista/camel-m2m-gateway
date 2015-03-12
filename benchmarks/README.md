@@ -9,6 +9,8 @@ test events using internal Camel timer and for each event we send a message to t
 use in-memory [SEDA](http://camel.apache.org/seda.html) queue to decouple events collection from the MQTT sending
 process. We also use [Camel Paho component](http://camel.apache.org/paho) as the MQTT broker.
 
+What is important we decided the test the performance of the MQTT at the level 2 of the QOS. Level 2 of [MQTT QOS](http://www.eclipse.org/paho/files/mqttdoc/Cclient/qos.html) provides the guaranteed exactly-once message delivery pattern. It provides the highest level of client reliablity, but consumes more client resources (Raspberry Pi processing power and memory in this case).
+
 The broker itself doesn't perform any action against the messages it receives. There is no subscriber to the MQTT topic. We use dockerized ActiveMQ 5.11.
 
 ### Raspberry Pi 2 results
