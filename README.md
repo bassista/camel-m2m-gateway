@@ -10,14 +10,3 @@ routing of the messages between the IoT edge devices (sensors, drones, cars, etc
 Currently two IoT enthusiasts - [Henryk Konsek](https://twitter.com/hekonsek) (from [Red Hat](http://redhat.com)) and
 [Arek Jurasz](https://twitter.com/arekjurasz) (from [Coderion](http://coderion.pl)). Wanna join us? We love
 contributors!
-
-## Benchmarks
-
-We perform and maintain the results of Camel benchmarks executed against the various computing platforms. More details
-can be found [here](https://github.com/hekonsek/camel-m2m-gateway/tree/master/benchmarks/README.md).
-
-## Eclipse Kura and Camel
-
-If you would like to run Camel together with [Eclipse Kura](https://eclipse.org/kura), check out the
-[Apache Camel Kura component](http://camel.apache.org/kura). It is a really easy option to deploy Camel routes into the
-Kura container.
