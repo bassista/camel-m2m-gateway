@@ -19,7 +19,7 @@
         <plexus-compiler-api.version>2.4</plexus-compiler-api.version>
 
         <activemq.version>5.11.1</activemq.version>
-        <camel.version>2.15-SNAPSHOT</camel.version>
+        <camel.version>2.15.0</camel.version>
         <commons.lang.version>3.3.2</commons.lang.version>
         <paho.version>1.0.2</paho.version>
         <spring.boot.version>1.2.2.RELEASE</spring.boot.version>
@@ -115,7 +115,7 @@
     </build>
 
     <repositories>
-        <!-- Required to get Camel 2.15 . -->
+        <!-- Required Camel -->
         <repository>
             <id>apache.snapshots</id>
             <name>Apache Development Snapshot Repository</name>
@@ -123,23 +123,20 @@
             <releases>
                 <enabled>false</enabled>
             </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
         </repository>
 
         <!-- Required by Zed snapshots -->
         <repository>
             <id>sonatype-snapshots</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
         </repository>
 
         <repository>
             <id>Eclipse Paho Repo</id>
             <url>https://repo.eclipse.org/content/repositories/paho-releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
