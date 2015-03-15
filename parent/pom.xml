@@ -17,11 +17,11 @@
         <groovy-eclipse-compiler.version>2.9.1-01</groovy-eclipse-compiler.version>
         <maven.compiler.version>3.2</maven.compiler.version>
         <plexus-compiler-api.version>2.4</plexus-compiler-api.version>
+        <spring-boot-plugin.version>1.2.2.RELEASE</spring-boot-plugin.version>
 
         <activemq.version>5.11.1</activemq.version>
         <commons.lang.version>3.3.2</commons.lang.version>
         <paho.version>1.0.2</paho.version>
-        <spring.boot.version>1.2.2.RELEASE</spring.boot.version>
         <zed.version>0.0.19-SNAPSHOT</zed.version>
     </properties>
 
@@ -89,7 +89,7 @@
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${spring.boot.version}</version>
+                    <version>${spring-boot-plugin.version}</version>
                     <configuration>
                         <mainClass>org.apache.camel.spring.boot.FatJarRouter</mainClass>
                     </configuration>
@@ -106,7 +106,7 @@
     </build>
 
     <repositories>
-        <!-- Required Camel -->
+        <!-- Required by the Camel snapshots. -->
         <repository>
             <id>apache.snapshots</id>
             <name>Apache Development Snapshot Repository</name>
@@ -116,7 +116,7 @@
             </releases>
         </repository>
 
-        <!-- Required by Zed snapshots -->
+        <!-- Required by the Zed snapshots. TODO Migrate to fixed zed versions. -->
         <repository>
             <id>sonatype-snapshots</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
@@ -125,6 +125,7 @@
             </releases>
         </repository>
 
+        <!-- Required by the Paho. -->
         <repository>
             <id>Eclipse Paho Repo</id>
             <url>https://repo.eclipse.org/content/repositories/paho-releases/</url>
