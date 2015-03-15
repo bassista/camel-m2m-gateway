@@ -123,6 +123,9 @@
             <releases>
                 <enabled>false</enabled>
             </releases>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
         </repository>
 
         <!-- Required by the Paho. -->
