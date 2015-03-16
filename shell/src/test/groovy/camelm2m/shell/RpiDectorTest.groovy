@@ -4,13 +4,22 @@ import camelm2m.shell.utils.RpiDetector
 import org.junit.Assert
 import org.junit.Test
 
+import static org.junit.Assume.assumeFalse
+
 class RpiDectorTest extends Assert {
 
     def rpiDetector = new RpiDetector()
 
     @Test
     void shouldReachDevice() {
-        def address = rpiDetector.detectReachableAddresses().first()
+        // Given
+        def addresses = rpiDetector.detectReachableAddresses()
+        assumeFalse(addresses.isEmpty())
+
+        // When
+        def address = addresses.first()
+
+        // Then
         assertTrue(address.isReachable(5000))
     }
 
