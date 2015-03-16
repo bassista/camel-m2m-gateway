@@ -6,6 +6,7 @@ import zed.ssh.client.SshClient
 import java.util.stream.Collectors
 
 import static java.net.NetworkInterface.networkInterfaces
+import static java.util.Collections.emptyList
 import static org.slf4j.LoggerFactory.getLogger
 
 class RpiDetector {
@@ -38,6 +39,10 @@ class RpiDetector {
         def networkInterface = networkInterfaces.toList().find {
             it.displayName.startsWith('wlan') || it.displayName.startsWith('eth')
         }
+        if (networkInterface == null) {
+            return emptyList()
+        }
+
         def networkAddress = networkInterface.interfaceAddresses.find { it.address.getHostAddress().length() < 15 }
         def broadcast = networkAddress.broadcast
         def address = broadcast.hostAddress
