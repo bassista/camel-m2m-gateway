@@ -22,7 +22,7 @@
         <activemq.version>5.11.1</activemq.version>
         <commons.lang.version>3.3.2</commons.lang.version>
         <paho.version>1.0.2</paho.version>
-        <zed.version>0.0.19-SNAPSHOT</zed.version>
+        <zed.version>0.0.19</zed.version>
     </properties>
 
     <dependencyManagement>
