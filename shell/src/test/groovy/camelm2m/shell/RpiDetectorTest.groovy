@@ -6,7 +6,7 @@ import org.junit.Test
 
 import static org.junit.Assume.assumeFalse
 
-class RpiDectorTest extends Assert {
+class RpiDetectorTest extends Assert {
 
     def rpiDetector = new RpiDetector()
 
