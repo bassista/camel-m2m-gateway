@@ -14,7 +14,8 @@ class RpiDectorTest extends Assert {
     void shouldReachDevice() {
         // Given
         def addresses = rpiDetector.detectReachableAddresses()
-        assumeFalse(addresses.isEmpty())
+        assumeFalse('The test should be executed only when the proper network interfaces are available.',
+                addresses.isEmpty())
 
         // When
         def address = addresses.first()
