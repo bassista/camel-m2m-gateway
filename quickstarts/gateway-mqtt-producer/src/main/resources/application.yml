@@ -1,1 +1,1 @@
-spring.main.sources: camelm2m.quickstarts.mqttproducer.MqttProducerGateway
+spring.main.sources: camelm2m.quickstarts.mqttproducer.GatewayMqttProducer

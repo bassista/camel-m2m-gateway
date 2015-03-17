@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import static java.util.UUID.randomUUID
 
 @SpringBootApplication
-class MqttProducerGateway extends FatJarRouter {
+class GatewayMqttProducer extends FatJarRouter {
 
     @Override
     void configure() {

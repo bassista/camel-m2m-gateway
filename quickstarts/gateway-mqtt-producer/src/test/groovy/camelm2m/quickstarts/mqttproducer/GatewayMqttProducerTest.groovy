@@ -18,8 +18,8 @@ import static camelm2m.quickstarts.mqttproducer.MqttProducerGatewayTestConfigura
 import static org.springframework.util.SocketUtils.findAvailableTcpPort
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = [MqttProducerGatewayTestConfiguration.class, MqttProducerGateway.class])
-class MqttProducerGatewayTest extends Assert {
+@SpringApplicationConfiguration(classes = [MqttProducerGatewayTestConfiguration.class, GatewayMqttProducer.class])
+class GatewayMqttProducerTest extends Assert {
 
     @EndpointInject(uri = 'mock:test')
     MockEndpoint mock

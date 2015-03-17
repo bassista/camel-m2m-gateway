@@ -11,6 +11,15 @@ Currently two IoT enthusiasts - [Henryk Konsek](https://twitter.com/hekonsek) (f
 [Arek Jurasz](https://twitter.com/arekjurasz) (from [Coderion](http://coderion.pl)). Wanna join us? We love
 contributors!
 
+## Features
+
+- Field gateway
+    - MQTT connector
+
+## Reference documentation
+
+The reference documentation of the project can be found [here](https://github.com/hekonsek/camel-m2m-gateway/blob/master/docs/reference.md).
+
 ## Build status
 
 [![Build Status](https://travis-ci.org/hekonsek/camel-m2m-gateway.svg?branch=master)](https://travis-ci.org/hekonsek/camel-m2m-gateway)
