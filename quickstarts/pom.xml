@@ -14,7 +14,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>mqtt-producer-gateway</module>
+        <module>gateway-mqtt-producer</module>
     </modules>
 
 </project>

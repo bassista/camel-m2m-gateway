@@ -1,1 +1,0 @@
-spring.main.sources: camelm2m.benchmarks.mqtt.forward.MqttForwardBenchmark
