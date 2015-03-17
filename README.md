@@ -13,8 +13,8 @@ contributors!
 
 ## Features
 
-- Field gateway
-    - MQTT connector
+- [Field gateway](https://github.com/hekonsek/camel-m2m-gateway/blob/master/docs/reference.md#field-gateway)
+    - [MQTT connector](https://github.com/hekonsek/camel-m2m-gateway/blob/master/docs/reference.md#mqtt-connector)
 
 ## Reference documentation
 
