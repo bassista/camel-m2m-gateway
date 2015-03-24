@@ -1,5 +1,7 @@
 package camelm2m.shell
 
+import camelm2m.shell.endpoints.DetectDevicesEndpoint
+import camelm2m.shell.endpoints.DetectRpiDevicesEndpoint
 import com.github.dockerjava.api.DockerClient
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -18,12 +20,21 @@ class CamelM2MShellConfiguration {
     static void main(String... args) {
         new SpringApplication(CamelM2MShellConfiguration.class).run(args)
     }
+//
+//    @Bean
+//    DeployablesManager deployablesManager(ZedHome zedHome, DockerClient docker) {
+//        def deployDirectory = zedHome.deployDirectory()
+//        def workspaceFile = new File(deployDirectory, 'workspace')
+//        new FileSystemDeployablesManager(zedHome, workspaceFile, allDeployableHandlers(workspaceFile, docker))
+//    }
 
     @Bean
-    DeployablesManager deployablesManager(ZedHome zedHome, DockerClient docker) {
-        def deployDirectory = zedHome.deployDirectory()
-        def workspaceFile = new File(deployDirectory, 'workspace')
-        new FileSystemDeployablesManager(zedHome, workspaceFile, allDeployableHandlers(workspaceFile, docker))
+    DetectDevicesEndpoint detectDevicesEndpoint() {
+        new DetectDevicesEndpoint()
     }
 
+    @Bean
+    DetectRpiDevicesEndpoint detectRpiDevicesEndpoint() {
+        new DetectRpiDevicesEndpoint()
+    }
 }

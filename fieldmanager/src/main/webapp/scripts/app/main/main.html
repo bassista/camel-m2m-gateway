@@ -1,0 +1,20 @@
+<div ng-cloak xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+        <div class="col-md-4">
+            <a href="#" class="list-group-item active">
+                RPi device list
+            </a>
+            <div ng-repeat="rpi in devices">
+                <a href="#" class="list-group-item">{{ rpi.ip }}</a>
+            </div>
+            <div ng-show="searching" class="alert alert-info">
+                Searching devices ...
+            </div>
+            <div ng-show="notFound" class="alert alert-warning">
+                No device found.
+            </div>
+        </div>
+        <div class="col-md-8">
+        </div>
+    </div>
+</div>

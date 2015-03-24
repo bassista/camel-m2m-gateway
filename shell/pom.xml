@@ -10,7 +10,9 @@
         <version>0.1-SNAPSHOT</version>
         <relativePath>../parent</relativePath>
     </parent>
+
     <artifactId>camelm2m-shell</artifactId>
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
@@ -50,6 +52,10 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

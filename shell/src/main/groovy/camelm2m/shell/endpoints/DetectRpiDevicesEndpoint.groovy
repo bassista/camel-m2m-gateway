@@ -1,0 +1,20 @@
+package camelm2m.shell.endpoints
+
+import camelm2m.shell.utils.RpiDetector
+import org.springframework.boot.actuate.endpoint.AbstractEndpoint
+
+class DetectRpiDevicesEndpoint extends AbstractEndpoint<List<String>> {
+
+    private static final int INDEX_OF_LEADING_SLASH = 1
+
+    DetectRpiDevicesEndpoint() {
+        super("detect-rpi-devices", false, true)
+    }
+
+    @Override
+    List<String> invoke() {
+        new RpiDetector().detectRpiAddresses().collect {
+            it.toString().substring(INDEX_OF_LEADING_SLASH)
+        }
+    }
+}

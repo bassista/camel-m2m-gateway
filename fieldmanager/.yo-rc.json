@@ -1,0 +1,18 @@
+{
+    "generator-jhipster": {
+        "baseName": "fieldmanager",
+        "packageName": "camelm2m.fieldmanager",
+        "packageFolder": "camelm2m/fieldmanager",
+        "authenticationType": "cookie",
+        "hibernateCache": "no",
+        "clusteredHttpSession": "no",
+        "websocket": "no",
+        "databaseType": "sql",
+        "devDatabaseType": "h2Memory",
+        "prodDatabaseType": "mysql",
+        "useCompass": false,
+        "buildTool": "maven",
+        "frontendBuilder": "grunt",
+        "javaVersion": "8"
+    }
+}

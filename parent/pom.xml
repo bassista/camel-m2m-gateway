@@ -18,6 +18,7 @@
         <maven.compiler.version>3.2</maven.compiler.version>
         <plexus-compiler-api.version>2.4</plexus-compiler-api.version>
         <spring-boot-plugin.version>1.2.2.RELEASE</spring-boot-plugin.version>
+        <maven-war-plugin.version>2.6</maven-war-plugin.version>
 
         <activemq.version>5.11.1</activemq.version>
         <commons.lang.version>3.3.2</commons.lang.version>
@@ -33,6 +34,12 @@
                 <version>${zed.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.github.camel-m2m-gateway</groupId>
+                <artifactId>camelm2m-shell</artifactId>
+                <version>${project.version}</version>
+                <classifier>classes</classifier>
             </dependency>
             <dependency>
                 <groupId>org.apache.activemq</groupId>
@@ -84,9 +91,6 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${spring-boot-plugin.version}</version>
-                    <configuration>
-                        <mainClass>org.apache.camel.spring.boot.FatJarRouter</mainClass>
-                    </configuration>
                     <executions>
                         <execution>
                             <goals>
@@ -94,6 +98,15 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${maven-war-plugin.version}</version>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                        <attachClasses>true</attachClasses>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
