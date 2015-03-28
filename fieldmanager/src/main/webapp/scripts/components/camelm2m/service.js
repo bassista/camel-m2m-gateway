@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fieldmanagerApp')
-    .factory('Camelm2mShell', function ($http, DETECT_RPI_DEVICES_URL) {
+    .factory('Camelm2mShell', function ($http, DETECT_RPI_DEVICES_URL, DEPLOY) {
         return {
             rpiDevices: function() {
                 return $http.get(DETECT_RPI_DEVICES_URL).then(function(response) {
@@ -16,6 +16,10 @@ angular.module('fieldmanagerApp')
                     }, devices);
                     return devices;
                 });
+            },
+
+            deploy: function(uri) {
+                return $http.post(uri, DEPLOY);
             }
         };
     });

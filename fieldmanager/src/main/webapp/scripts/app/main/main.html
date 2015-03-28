@@ -1,11 +1,11 @@
 <div ng-cloak xmlns="http://www.w3.org/1999/html">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" ng-controller="DeviceListController">
             <a href="#" class="list-group-item active">
                 RPi device list
             </a>
             <div ng-repeat="rpi in devices">
-                <a href="#" class="list-group-item">{{ rpi.ip }}</a>
+                <label ng-click="selectDevice(rpi)" class="list-group-item">{{ rpi.ip }}</label>
             </div>
             <div ng-show="searching" class="alert alert-info">
                 Searching devices ...
@@ -14,7 +14,53 @@
                 No device found.
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8" ng-controller="DeviceDetailsController">
+            <div ng-show="device">
+                <h1>{{ device.ip }}</h1>
+
+                <div ng-show="deploySuccess" class="alert alert-success">
+                    {{ deploySuccess }}
+                </div>
+                <div ng-show="deployError" class="alert alert-warning">
+                    {{ deployError }}
+                </div>
+                <form class="form" role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="groupid"
+                               placeholder="groupId" ng-model="deployable.groupid">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="artifactId"
+                               placeholder="artifactId" ng-model="deployable.artifactid">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="version"
+                               placeholder="version" ng-model="deployable.version">
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="deploy()">
+                        Deploy
+                    </button>
+                </form>
+
+                <div>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>groupId</th>
+                            <th>artifactId</th>
+                            <th>version</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in items">
+                            <td>{{ item.groupid }}</td>
+                            <td>{{ item.artifactid }}</td>
+                            <td>{{ item.version }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

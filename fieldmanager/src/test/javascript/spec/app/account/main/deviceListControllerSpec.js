@@ -20,12 +20,12 @@ describe('Controllers Tests ', function () {
         };
     });
 
-    describe('MainController', function () {
+    describe('DeviceListController', function () {
 
         beforeEach(inject(function ($rootScope, $controller, $q) {
             q = $q;
             $scope = $rootScope.$new();
-            $controller('MainController', {$scope: $scope, Camelm2mShell: camelm2mShell});
+            $controller('DeviceListController', {$scope: $scope, Camelm2mShell: camelm2mShell});
         }));
 
         it('should set device list', function () {
