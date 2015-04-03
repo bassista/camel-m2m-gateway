@@ -37,6 +37,13 @@
                         <input type="text" class="form-control" id="version"
                                placeholder="version" ng-model="deployable.version">
                     </div>
+                    <div class="form-group">
+                        <select class="form-control" id="artifactType"
+                               placeholder="version" ng-model="deployable.artifactType"
+                                ng-options="opt as opt.label for opt in artifactTypes">
+                            <option value=''>- Type -</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary" ng-click="deploy()">
                         Deploy
                     </button>

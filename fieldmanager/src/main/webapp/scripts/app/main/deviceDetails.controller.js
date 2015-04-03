@@ -1,13 +1,19 @@
 'use strict';
 
 angular.module('fieldmanagerApp')
-    .controller('DeviceDetailsController', function ($rootScope, $scope, Camelm2mShell, DEPLOY) {
+    .controller('DeviceDetailsController', function ($rootScope, $scope, Camelm2mShell) {
+
+        $scope.artifactTypes = [
+            { label: 'jar', value: 'jar' },
+            { label: 'war', value: 'war' }
+        ];
 
         function init() {
             $scope.deployable = {
                 groupid: null,
                 artifactid: null,
-                version: null
+                version: null,
+                artifactType: null
             }
         }
 
@@ -20,8 +26,8 @@ angular.module('fieldmanagerApp')
         });
 
         $scope.deploy = function() {
-            var uri = 'fatjar:mvn:' + $scope.deployable.groupid + '/' + $scope.deployable.artifactid + '/' + $scope.deployable.version + '/war';
-            Camelm2mShell.deploy(DEPLOY, uri).then(function(success) {
+            var uri = 'fatjar:mvn:' + $scope.deployable.groupid + '/' + $scope.deployable.artifactid + '/' + $scope.deployable.version + '/' + $scope.deployable.artifactType.value;
+            Camelm2mShell.deploy(uri).then(function(success) {
                 $scope.deploySuccess = 'Deployed ' + uri;
             }, function(err) {
                 $scope.deployError = err;

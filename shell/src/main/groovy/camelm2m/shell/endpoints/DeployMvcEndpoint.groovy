@@ -1,5 +1,6 @@
 package camelm2m.shell.endpoints
 
+import camelm2m.shell.dto.PostBody
 import org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -19,11 +20,12 @@ class DeployMvcEndpoint extends EndpointMvcAdapter {
         this.deployablesManager = deployablesManager
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity deploy(@RequestBody String uri) {
+    public ResponseEntity deploy(@RequestBody PostBody post) {
         try {
-            deployablesManager.deploy(uri)
+            deployablesManager.deploy(post.uri)
             new ResponseEntity(HttpStatus.OK)
         } catch (Exception ex) {
             new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)

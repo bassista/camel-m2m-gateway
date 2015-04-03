@@ -1,7 +1,7 @@
 package camelm2m.shell
 
+import camelm2m.shell.dto.PostBody
 import org.junit.Assert
-import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,6 +36,9 @@ class CamelM2mShellTest extends Assert {
 
     private static RestTemplate restTemplate;
 
+    @Autowired
+    DeployablesManager deploymentManager;
+
     @BeforeClass
     static void beforeClass() {
         System.setProperty("server.port", "${apiPort}")
@@ -50,22 +53,23 @@ class CamelM2mShellTest extends Assert {
     @Test
     void shouldReturn200ForOk() {
         // Given
-        String uri = "fatjar:mvn:com.google.guava/guava/18.0"
+        PostBody data = new PostBody(uri: "fatjar:mvn:com.google.guava/guava/18.0")
 
         // When
-        ResponseEntity response = restTemplate.postForObject("http://localhost:${apiPort}/deploy", uri, String.class)
+        def response = restTemplate.postForEntity("http://localhost:${apiPort}/deploy", data, ResponseEntity.class)
 
         // Then
         assertEquals(response.getStatusCode(), HttpStatus.OK)
+        assertTrue(Arrays.asList(deploymentManager.workspace().list()).contains("guava-18.0.jar"));
     }
 
     @Test
     void shouldReturn500ForError() {
         // Given
-        String uri = "mvn:com.google.guava/guava/18.0"
+        PostBody data = new PostBody(uri: "mvn:com.google.guava/guava/18.0")
 
         // When
-        ResponseEntity response = restTemplate.postForEntity("http://localhost:${apiPort}/deploy", uri, String.class)
+        def response = restTemplate.postForEntity("http://localhost:${apiPort}/deploy", data, ResponseEntity.class)
 
         // Then
         assertEquals(response.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR)

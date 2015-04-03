@@ -8,7 +8,6 @@ angular.module('fieldmanagerApp')
                     var devices = [];
                     angular.forEach(response.data, function(value) {
                         var rpi = {};
-                        rpi.image = 'http://www.vclouds.nl/wp-content/uploads/2012/07/Raspberry-Pi-Logo_thumb.jpg';
                         rpi.ip = value;
                         rpi.active = true;
 
@@ -18,8 +17,10 @@ angular.module('fieldmanagerApp')
                 });
             },
 
-            deploy: function(uri) {
-                return $http.post(uri, DEPLOY);
+            deploy: function(_uri) {
+                var data = {}
+                data.uri = _uri
+                return $http.post(DEPLOY, data);
             }
         };
     });
