@@ -17,8 +17,9 @@ angular.module('fieldmanagerApp')
                 });
             },
 
-            deploy: function(_uri) {
+            deploy: function(_uri, _ip) {
                 var data = {}
+                _uri = _uri + '?ssh-host=' + _ip + '&ssh-user=pi&ssh-password=raspberry';
                 data.uri = _uri
                 return $http.post(DEPLOY, data);
             }
